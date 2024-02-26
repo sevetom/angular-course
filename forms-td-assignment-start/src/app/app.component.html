@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <!-- Add a Form with the following Inputs (and Validators)
+           1) Mail address (should not be empty and should be an email address)
+           2) A Dropdown which allows the user to select from three different Subscriptions ("Basic", "Advanced", "Pro")
+              Set "Advanced" as Default
+           3) A Password field (should not be empty)
+           4) A Submit Button
+
+           Display a warning message if the Form is invalid AND was touched. Display a warning message below each input if it's invalid.
+
+           Upon submitting the form, you should simply print the Value of the Form to the Console.
+           Optionally, display it in your template.
+      -->
+      <form (ngSubmit)="onSubmit()" #f="ngForm">
+        <div class="form-group">
+          <label for="email">Mail</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            ngModel
+            name="email"
+            required
+            email
+            #email="ngModel"
+          />
+          <p *ngIf="!email.valid">Email is not valid</p>
+          <label for="subscription">Subscription</label>
+          <select
+            type="text"
+            name="subscription"
+            id="subscription"
+            [ngModel]="defaultSubscription"
+            class="form-control"
+            #sub="ngModel"
+          >
+            <option value="basic">Basic</option>
+            <option value="advanced">Advanced</option>
+            <option value="pro">Pro</option>
+          </select>
+          <p *ngIf="!sub.valid">Subscription is not valid</p>
+          <label for="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            ngModel
+            required
+            class="form-control"
+            #pw="ngModel"
+          />
+          <p *ngIf="!pw.valid">Password is invalid!</p>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <p *ngIf="!f.valid && f.touched" class="text-danger">Form is invalid!</p>
+    </div>
+  </div>
+</div>
